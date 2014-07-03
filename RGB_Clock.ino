@@ -1,9 +1,12 @@
 #include "Adafruit_NeoPixel.h"
 #include "WS2812_Definitions.h"
-#include <Time.h>
+#include "Time.h"
 
 #define PIN 4
 #define LED_COUNT 60
+#define HOURCOLOR YELLOW
+#define MINUTECOLOR BLUE
+#define SECONDCOLOR RED
 
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = Arduino pin number (most are valid)
@@ -20,7 +23,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800
 // on a live circuit...if you must, connect GND first.
 
 void setup() {
-  setTime(1,1,5,1,1,11); // set time to noon Jan 1 2011
+  setTime(9,25,0,1,1,11); // set time to noon Jan 1 2011
   Serial.begin(9600);
   strip.begin();
   strip.setBrightness(255);
