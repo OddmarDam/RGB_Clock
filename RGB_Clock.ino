@@ -4,9 +4,11 @@
 
 #define PIN 4
 #define LED_COUNT 60
-#define HOURCOLOR RED
-#define MINUTECOLOR BLUE
+
+#define HOURCOLOR CYAN
+#define MINUTECOLOR MAGENTA
 #define SECONDCOLOR YELLOW
+
 #define BREAKCOLOR GREEN
 
 // Parameter 1 = number of pixels in strip
@@ -24,7 +26,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800
 // on a live circuit...if you must, connect GND first.
 
 void setup() {
-  setTime(11,20,0,1,1,11); // set time to noon Jan 1 2011
+  setTime(11,39,0,1,1,11); // set time to noon Jan 1 2011
   Serial.begin(9600);
   strip.begin();
   strip.setBrightness(255);
@@ -39,6 +41,8 @@ void loop() {
 
 void DrawClock(){
   int h = hour();
+  int m = minute();
+  int s = second();
   
   if (h > 12)
     h = h - 12;
@@ -55,27 +59,27 @@ void DrawClock(){
   if (minute() == 0)
     strip.setPixelColor(59,0);
   else
-    strip.setPixelColor(minute()-1, 0);
+    strip.setPixelColor(m-1, 0);
   
   if (second() == 0)
     strip.setPixelColor(59, 0);
   else
-    strip.setPixelColor(second()-1, 0);
+    strip.setPixelColor(s-1, 0);
 
 
   // Draw coffee break
-  if (hour() == 9 && (minute() >=30 && minute() <=45))
+  if (hour() == 9 && (m >=30 && m <=45))
   {
-    for(int b=minute()+1;b<=45;b++)
+    for(int b=m+1;b<=45;b++)
     {
       strip.setPixelColor(b, BREAKCOLOR);
     }    
   }
 
   // Draw lunch break
-  if (hour() == 12 && (minute() >=15 && minute() <=45))
+  if (hour() == 12 && (m >=15 && m <=45))
   {
-    for(int b=minute()+1;b<=45;b++)
+    for(int b=m+1;b<=45;b++)
     {
       strip.setPixelColor(b, BREAKCOLOR);
     }    
@@ -83,17 +87,16 @@ void DrawClock(){
 
 
   // Draw Hour, minute, second
-  if (minute() == h)
+  if (m == h)
     strip.setPixelColor(h, WHITE);  
   else
   {
-    strip.setPixelColor(minute(), MINUTECOLOR);
+    strip.setPixelColor(m, MINUTECOLOR);
     strip.setPixelColor(h, HOURCOLOR);  
   }
   
-  strip.setPixelColor(second(), SECONDCOLOR);
+  strip.setPixelColor(s, SECONDCOLOR);
   
-
   strip.show();
  }
 
