@@ -13,7 +13,7 @@
    http://www.w3schools.com/html/html_colorvalues.asp */
    
 #define BLACK			0x000000
-#define NAVY			0x000080
+  #define NAVY			0x000080
 #define DARKBLUE		0x00008B
 #define MEDIUMBLUE		0x0000CD
 #define BLUE			0x0000FF
@@ -21,7 +21,7 @@
 #define GREEN			0x008000
 #define TEAL			0x008080
 #define DARKCYAN		0x008B8B
-#define DEEPSKYBLUE		0x00BFFF
+  #define DEEPSKYBLUE		0x00BFFF
 #define DARKTURQUOISE		0x00CED1
 #define MEDIUMSPRINGGREEN	0x00FA9A
 #define LIME			0x00FF00
