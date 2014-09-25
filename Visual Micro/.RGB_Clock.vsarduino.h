@@ -12,7 +12,7 @@
 #define _VSARDUINO_H_
 #define __AVR_ATmega328p__
 #define __AVR_ATmega328P__
-#define ARDUINO 156
+#define ARDUINO 105
 #define ARDUINO_MAIN
 #define __AVR__
 #define __avr__
@@ -44,12 +44,14 @@ extern "C" void __cxa_pure_virtual() {;}
 void DrawClock();
 void rainbow(uint8_t wait);
 
-#include "c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino\arduino.h"
-#include "c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard\pins_arduino.h" 
-#include "C:\Projects\GIT\RGB_Clock\RGB_Clock.ino"
-#include "C:\Projects\GIT\RGB_Clock\Adafruit_NeoPixel.cpp"
-#include "C:\Projects\GIT\RGB_Clock\Adafruit_NeoPixel.h"
-#include "C:\Projects\GIT\RGB_Clock\Time.cpp"
-#include "C:\Projects\GIT\RGB_Clock\Time.h"
-#include "C:\Projects\GIT\RGB_Clock\WS2812_Definitions.h"
+#include "C:\Program Files (x86)\Arduino\hardware\arduino\cores\arduino\arduino.h"
+#include "C:\Program Files (x86)\Arduino\hardware\arduino\variants\standard\pins_arduino.h" 
+#include "C:\Projects\Oddmar Privat\RGB_Clock\RGB_Clock.ino"
+#include "C:\Projects\Oddmar Privat\RGB_Clock\Adafruit_NeoPixel.cpp"
+#include "C:\Projects\Oddmar Privat\RGB_Clock\Adafruit_NeoPixel.h"
+#include "C:\Projects\Oddmar Privat\RGB_Clock\DS1307RTC.cpp"
+#include "C:\Projects\Oddmar Privat\RGB_Clock\DS1307RTC.h"
+#include "C:\Projects\Oddmar Privat\RGB_Clock\Time.cpp"
+#include "C:\Projects\Oddmar Privat\RGB_Clock\Time.h"
+#include "C:\Projects\Oddmar Privat\RGB_Clock\WS2812_Definitions.h"
 #endif
