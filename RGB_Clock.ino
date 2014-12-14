@@ -30,6 +30,8 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800
 void setup() {
 //  setTime(9,26,0,1,1,11); // set time to noon Jan 1 2011
   Serial.begin(9600);
+  Serial.println("RGB Clock");
+  
   setSyncProvider(RTC.get);   // the function to get the time from the RTC
 
   if(timeStatus()!= timeSet) 
@@ -42,6 +44,45 @@ void setup() {
   strip.begin();
   strip.setBrightness(255);
   strip.show(); // Initialize all pixels to 'off'
+}
+
+void loop() 
+{
+  if(Serial.available())
+  {
+     time_t t = processSyncMessage();
+     if(t >0)
+     {
+        RTC.set(t);   // set the RTC and the system time to the received value
+        setTime(t);          
+     }
+  } 
+//  digitalClockDisplay();
+  DrawClock();
+  delay(500);
+}
+
+/*  code to process time sync messages from the serial port   */
+#define TIME_MSG_LEN  11   // time sync to PC is HEADER followed by unix time_t as ten ascii digits
+#define TIME_HEADER  'T'   // Header tag for serial time sync message
+
+time_t processSyncMessage() {
+  // return the time if a valid sync message is received on the serial port.
+  while(Serial.available() >=  TIME_MSG_LEN ){  // time message consists of a header and ten ascii digits
+    char c = Serial.read() ; 
+    Serial.print(c);  
+    if( c == TIME_HEADER ) {       
+      time_t pctime = 0;
+      for(int i=0; i < TIME_MSG_LEN -1; i++){   
+        c = Serial.read();          
+        if( c >= '0' && c <= '9'){   
+          pctime = (10 * pctime) + (c - '0') ; // convert digits to a number    
+        }
+      }   
+      return pctime; 
+    }  
+  }
+  return 0;
 }
 
 void digitalClockDisplay(){
@@ -58,19 +99,12 @@ void digitalClockDisplay(){
   Serial.println(); 
 }
 
-
 void printDigits(int digits){
   // utility function for digital clock display: prints preceding colon and leading 0
   Serial.print(":");
   if(digits < 10)
     Serial.print('0');
   Serial.print(digits);
-}
-
-void loop() {
-  
-  DrawClock();
-  delay(500);
 }
 
 void DrawClock(){
